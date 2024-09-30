@@ -1,0 +1,7 @@
+.wrapper {
+  background: rgb(80, 80, 80);
+  min-height: 100vh;
+}
+nav {
+  background: rgba(0, 0, 0, 0.503);
+}
