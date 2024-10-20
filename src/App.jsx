@@ -1,14 +1,30 @@
+import { useState } from "react";
 import "./App.css";
 import { Display } from "./components/Display";
 import { Hero } from "./components/Hero";
 
 function App() {
+  const [movieList, setMovieList] = useState([]);
+  const addMovieToList = (movie) => {
+    // remove possible duplicate movie
+    const tempMv = movieList.filter((item) => item.imdbID !== movie.imdbID);
+    setMovieList([...tempMv, movie]);
+  };
+
+  const handleOnDeleteMovie = (imdbID) => {
+    confirm(
+      "Are you sure, you want to delete this movie from the movie list"
+    ) && setMovieList(movieList.filter((mv) => mv.imdbID !== imdbID));
+  };
   return (
     <div className="wrapper">
       {/* Hero section  */}
-      <Hero />
+      <Hero addMovieToList={addMovieToList} />
       {/* Display section  */}
-      <Display />
+      <Display
+        movieList={movieList}
+        handleOnDeleteMovie={handleOnDeleteMovie}
+      />
     </div>
   );
 }
